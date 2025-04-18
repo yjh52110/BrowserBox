@@ -1,0 +1,11 @@
+- nuke debug outputs for all commands (bbx run bbx stop etc), finesse output make it nice
+
+- UNBLOCK drive. Mitigations to unblock sites like WSJ/Bloomberg. 
+
+- fix pointer alignment when using page zoom (pinch/spread)
+
+- ensure chrome's are shut down (can we clear bbpro from pm2?)
+
+- solidify instance hw id, analytics
+
+- mitigations
