@@ -1,0 +1,9 @@
+{
+  "id": "cyano-wallet__0.5.1__0696",
+  "product": "Cyano wallet",
+  "version": "0.5.1",
+  "verdict": "clean",
+  "worst_severity": "none",
+  "confirmed_findings": [],
+  "summary": "manifest.json 确认为 Cyano wallet 0.5.1（Ontology 钱包，MV2）。新建账户/身份走 accountSignUp、identitySignUp：utils.generateMnemonic(32) 用 secure-random（window.crypto/msCrypto.getRandomValues，缺失即抛错，无 Math.random 回退）取 32 字节熵，再 bip39.entropyToMnemonic；私钥由 PrivateKey.generateFromMnemonic 经 BIP39 PBKDF2 与 hdkey-secp256r1 沿 m/44'/1024'/0'/0/0（或 NEO 的 m/44'/888'）派生。金库盐为 Account.create/Identity.create 的 randomBytes(16)（同样 secure-random）；默认 AES-256-GCM 的 12 字节 IV 由 scrypt(口令, 盐) 前 12 字节导出，createCipheriv 使用该派生 IV。捆绑的 CryptoJS WordArray.random（Math.random）仅出现在未走密钥路径的 OpenSSL 口令 KDF；实际 AES.encrypt 传入 WordArray 密钥与显式 IV。Math.random 仅用于 ReduxHistory 路由 key 与 WebsocketSender 请求 Id；uuid 钱包/账户标签优先 getRandomValues。未发现 Math.random/Date.now 生成助记词、HD 种子、私钥或金库 IV/nonce/盐。"
+}
