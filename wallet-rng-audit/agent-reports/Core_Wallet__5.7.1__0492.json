@@ -1,0 +1,9 @@
+{
+  "id": "Core_Wallet__5.7.1__0492",
+  "product": "Netflix Party is now Teleparty",
+  "version": "5.7.1",
+  "verdict": "clean",
+  "worst_severity": "none",
+  "confirmed_findings": [],
+  "summary": "目录项 Core_Wallet 5.7.1 经 manifest/_locales/en 确认为 Netflix Party is now Teleparty 5.7.1，是跨站同步观影/聊天扩展，不是钱包，本地无助记词、HD 种子或私钥生成路径。派对 sessionId 由服务端 createSession 下发，Firebase idToken/refreshToken 亦来自服务端。uuid（Hu/Wu）用 crypto.getRandomValues 生成分析 UUID，缺失即抛错并回退空串，无 Math.random 回退。Math.random/Date.now 仅用于 IPC 回调 id、Socket.IO 缓存破坏参数、重试抖动、默认头像/反应动画/横幅、MessageChannel 关联 eventId、React/jQuery 内部名与分析抽样。全包无 AES/subtle 加解密，无弱 RNG 用于密钥/助记词/IV/nonce/盐或秘密，判定 clean。"
+}
