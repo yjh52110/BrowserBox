@@ -1,0 +1,9 @@
+{
+  "id": "Cosmostation_Wallet__1.0.17__0497",
+  "product": "Cosmostation Wallet",
+  "version": "1.1.10",
+  "verdict": "clean",
+  "worst_severity": "none",
+  "confirmed_findings": [],
+  "summary": "manifest 确认实际产品为 Cosmostation Wallet 1.1.10（目录项 1.0.17 与 blob 不一致）。新建助记词走 bip39 generateMnemonic，默认熵源为 noble-hashes utils.randomBytes，底层 globalThis.crypto.getRandomValues，不可用即抛错。助记词经 PBKDF2-SHA512 得 HD 种子，再按链 BIP32/ed25519 派生 cosmos/evm/bitcoin/gno/aptos/sui/iota/solana 私钥，导入私钥亦不另造熵。保险库 aesEncrypt 为 CryptoJS AES 口令加密，OpenSSL KDF 盐 WordArray.random(8) 使用 getRandomValues（缺失则抛 Native crypto 错误），不回退 Math.random；tweetnacl/crypto-browserify/ethers randomBytes 同样绑定 getRandomValues。Math.random 仅用于助记词备份测验抽词/打乱、React/Redux/路由 key、axios 通道、重试抖动、Lottie/粒子动画；Date.now 出现在会话口令包装与 UUID 时间戳，不生成助记词/私钥/金库盐。未发现弱 RNG 用于密钥或保险库 IV/nonce/盐，判定 clean。"
+}
