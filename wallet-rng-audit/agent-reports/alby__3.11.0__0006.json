@@ -1,0 +1,10 @@
+{
+  "id": "alby__3.11.0__0006",
+  "product": "alby",
+  "version": "3.11.0",
+  "verdict": "clean",
+  "worst_severity": "none",
+  "confirmed_findings": [],
+  "false_positives_notes": "Static scanner flagged 38 critical 'CSPRNG fallback to Math.random' hits because its regex matches any randomBytes/getRandomValues token in minified bundles. Inspected implementations all fail closed: @scure/bip39 generateMnemonic (ls(Uj,128)) draws t/8 bytes via getRandomValues and throws if undefined; noble-hashes/noble-curves utils.randomBytes and randomPrivateKey do the same; CryptoJS 4.x WordArray.random uses getRandomValues/randomBytes and throws 'Native crypto module could not be used'; brorand _rand uses self.crypto.getRandomValues or throws; browserify-randombytes (61798) uses getRandomValues or throws. generateMnemonic() in options/popup/welcome is an RPC to the background. Nostr generatePrivateKey derives from the encrypted master mnemonic (HD), not a fresh weak RNG. AES-CBC IVs use R_(16) getRandomValues; NIP-04 IVs use WordArray.random(16). BitSet.js v5.1.1 defines BitSet.Random via Math.random but has zero call sites. Remaining Math.random uses are React/confetti/react-router keys, inpage/content-script postMessage ids, Nostr subscription ids, JWT/native request ids, NIP-59 created_at jitter, and localStorage sync triggers — not keys/mnemonics/IVs/nonces/seeds. No seedrandom, Mersenne, LCG, or Date.now entropy seeds.",
+  "summary": "Alby 3.11.0 的助记词、私钥与 AES IV 均通过 crypto.getRandomValues 生成，缺失 CSPRNG 时直接抛错，不回退到 Math.random。助记词由后台 @scure/bip39 generateMnemonic(wordlist, 128) 取 16 字节熵；Nostr 私钥由助记词 HD 派生；账户加密盐与 NIP-04/AES-CBC IV 来自 CryptoJS WordArray.random 或 noble-hashes randomBytes。静态扫描把压缩包中的 randomBytes 标识误判为“CSPRNG 回退”。BitSet.Random 使用 Math.random 但无调用点；其余 Math.random 仅用于 React/路由、请求关联 ID、Nostr 订阅 ID 与时间戳抖动。未发现用于密钥、助记词、IV/nonce 或种子的弱随机数缺陷。"
+}
