@@ -1,0 +1,9 @@
+{
+  "id": "bearby-extension__1.3.8__0216",
+  "product": "ZilPay",
+  "version": "1.3.7",
+  "verdict": "clean",
+  "worst_severity": "none",
+  "confirmed_findings": [],
+  "summary": "解包 manifest 实为 ZilPay 1.3.7（catalog 误标 bearby-extension 1.3.8）。助记词由后台 MnemonicController.generateMnemonic 经自定义 randomBytes 取 16/32 字节熵（默认 128 位，界面可选 256），仅调用 globalThis.crypto.getRandomValues，无 Math.random 回退；弹窗 GET_RANDOM_SEED 只是 RPC。账户私钥由助记词 PBKDF2（2048 轮，盐为 BIP39 mnemonic+口令）种子经 HDKey HMAC-SHA512 派生（m/44'/313'/0'/0/i），或用户导入；elliptic.genKeyPair 仅为库代码、无钱包调用点。现行金库助记词/HD 种子/导入钥走 Cipher AES-CTR，16 字节计数器/IV 来自同一 CSPRNG randomBytes；遗留 OldAes 口令模式盐与二维码导出/dapp 加解密的 WordArray.random(16) IV 均用 getRandomValues，失败即抛。Schnorr 签名 HMAC-DRBG 的 entropy/pers 来自 randomBytes(32)。其余 Math.random 仅用于助记词校验打乱、Ledger HID/U2F 通道与消息 ID、二维码标识与 dapp/UI 请求关联 ID；Jazzicon 的 Mersenne Twister 由地址确定性播种，仅绘头像。交易 nonce 为账户计数器。未发现助记词、密钥、IV/nonce 或种子路径的弱随机数缺陷。"
+}
