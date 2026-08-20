@@ -1,0 +1,10 @@
+{
+  "id": "alby_-_bitcoin_lightning_wallet_nostr_firefox_xpi_1_28_1__item__0026",
+  "product": "alby",
+  "version": "1.28.1",
+  "verdict": "clean",
+  "worst_severity": "none",
+  "confirmed_findings": [],
+  "false_positives_notes": "No static scanner used. Math.random appears only in React/confetti/history keys, Dexie storagemutated trigger, axios generateString (multipart boundary), and nativeMessaging JWT request ids — not keys/IV/nonce/seed. CryptoJS WordArray.random (two copies) uses getRandomValues/randomBytes and throws 'Native crypto module could not be used to get secure random number' with no Math.random fallback. noble-secp256k1 randomBytes/randomPrivateKey and noble-hashes xn() likewise throw if WebCrypto is missing. brorand uses self.crypto.getRandomValues or throws 'Not implemented yet'. uuid v4 uses crypto.getRandomValues and fail-closes. generateSalt uses globalThis.crypto.getRandomValues (62-char mapping is CSPRNG-based salt, not a weak PRNG). Noise_XK ephemeral keys use xn(32)/getRandomValues; ChaCha handshake IVs are protocol counter zeros per BOLT #8. elliptic genKeyPair exists but has zero call sites. No BIP39 generateMnemonic in this build. No seedrandom/Alea/Mersenne/LCG.",
+  "summary": "Alby Firefox XPI 1.28.1 未发现将 Math.random、时间戳或伪随机库用作密钥/助记词/IV/nonce/盐的缺陷。本版本不含 BIP39 助记词生成。Nostr 与 Commando 私钥、Lightning Noise_XK 临时密钥均由 noble 的 getRandomValues（缺失即抛错）生成。账户/LNC 加密盐与 NIP-04 AES IV 来自已修补的 CryptoJS WordArray.random，同样只接受原生 CSPRNG。其余 Math.random 仅用于 React/confetti/路由、Dexie 触发、axios 边界串和 nativeMessaging 请求 id。"
+}
