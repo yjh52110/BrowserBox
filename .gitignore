@@ -1,4 +1,7 @@
 /tmp/
 wallet-rng-audit/work/
 wallet-rng-audit/findings/*.json
+wallet-rng-audit/__pycache__/
+__pycache__/
+*.pyc
 /tmp/wallet-rng-work/
