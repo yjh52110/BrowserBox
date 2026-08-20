@@ -1,0 +1,4 @@
+/tmp/
+wallet-rng-audit/work/
+wallet-rng-audit/findings/*.json
+/tmp/wallet-rng-work/
