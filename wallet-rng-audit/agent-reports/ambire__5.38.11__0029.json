@@ -1,0 +1,9 @@
+{
+  "id": "ambire__5.38.11__0029",
+  "product": "ambire",
+  "version": "5.38.11",
+  "verdict": "clean",
+  "worst_severity": "none",
+  "confirmed_findings": [],
+  "summary": "Ambire 5.38.11 的助记词、密钥库主密钥/IV/盐与邮箱保险库恢复密钥均走 CSPRNG。EntropyGenerator.generateRandomMnemonic / generateRandomBytes 先取 ethers random.randomBytes（底层 getRandomValues，缺失即抛 UNSUPPORTED_OPERATION），再与 keccak256(CSPRNG||performance.now||可选鼠标额外熵) 异或；EmailVaultRecoverySecret 用 crypto-browserify.randomBytes(32)，无 Math.random 回退。GridPlus Lattice 会话私钥由 SHA256(password||deviceID||appName) 派生，Ambire 始终传入 privKey，不触发 SDK 里用 Math.random 填充的自定义 randomBytes(32)；该实现只生成 4 字节报文 msgId，AES-CBC 使用协议常量 IV。其余 Math.random、Lottie seedrandom/ARC4、Blockies seedrand 仅用于 UI/动画、重试抖动、bundler 选择、Sentry/uuid/identicon。未发现密钥、助记词、IV/nonce 或种子路径使用弱随机数或可预测种子 PRNG。"
+}
