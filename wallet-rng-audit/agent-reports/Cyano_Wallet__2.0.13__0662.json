@@ -1,0 +1,9 @@
+{
+  "id": "Cyano_Wallet__2.0.13__0662",
+  "product": "Paperpal: Free Grammar Checker, AI Writing Tool & Research Assistant",
+  "version": "2.0.13",
+  "verdict": "clean",
+  "worst_severity": "none",
+  "confirmed_findings": [],
+  "summary": "目录项 Cyano_Wallet 2.0.13 经解包 manifest 确认为 Paperpal: Free Grammar Checker, AI Writing Tool & Research Assistant 2.0.13（网页语法检查/改写/PDF 对话/文献引用助手），不是加密钱包，无助记词、HD 种子或私钥生成路径。Math.random 仅用于 React/WXT/Floating-UI 内部 id、postMessage 消息号、流式请求/聊天消息 id、Faro 会话 id、Uppy 上传 id、citeproc 引用 id、Font Awesome SVG id、web-vitals/Next 缓存破坏、Mermaid/Cytoscape 图布局与重试抖动；bundled crypt.randomBytes(Math.random) 无调用。UUID 走 uuid 的 crypto.getRandomValues（缺失即抛），PDF IndexedDB 键用 crypto.randomUUID；crypto.subtle 只做改写文本 SHA-256 与 Uppy S3 AWS4 HMAC（密钥来自账号配置）。非钱包且无弱 RNG 用于密钥/IV/nonce/盐，判定 clean。"
+}
