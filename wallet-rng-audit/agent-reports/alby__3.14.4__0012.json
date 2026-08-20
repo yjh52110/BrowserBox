@@ -1,0 +1,9 @@
+{
+  "id": "alby__3.14.4__0012",
+  "product": "alby",
+  "version": "3.14.4",
+  "verdict": "clean",
+  "worst_severity": "none",
+  "confirmed_findings": [],
+  "summary": "Alby 3.14.4 的助记词、私钥与 IV/nonce/salt 均来自 Web Crypto getRandomValues（或 Node randomBytes），缺失 CSPRNG 时抛错而不回退 Math.random。后台 generateMnemonic 为 @scure/bip39 的 vb(fz,128)，经 noble-hashes Df() 取 16 字节熵；UI 侧仅为 RPC。Nostr/Liquid/WebBTC 密钥从加密主助记词 HD 派生（Nostr 为 m/44'/1237'/0'/0/0），而非弱 RNG 新抽私钥。NIP-04 使用 CryptoJS 4.x WordArray.random(16)，NIP-44 默认 nonce 为 Jg(32)，金库盐为 getRandomValues(32)；uuid/brorand/browserify-randombytes 与 LNC/WASM runtime.getRandomData 同样失败即抛。Math.random 仅用于 React/路由/彩带、请求关联 ID、Nostr 订阅 ID 与 created_at 隐私抖动；BitSet.Random 与 html5-qrcode Alea 无密钥路径调用。未发现用于助记词/密钥/IV/nonce/种子的弱熵源。"
+}
