@@ -1,0 +1,9 @@
+{
+  "id": "BEW_Lite__4.5.0.40__0254",
+  "product": "Loadex",
+  "version": "4.5.0.40",
+  "verdict": "clean",
+  "worst_severity": "none",
+  "confirmed_findings": [],
+  "summary": "目录项 BEW_Lite 解包后经 manifest name/version 确认为 Loadex 4.5.0.40，是面向货运调度员的货源/匹配/保理辅助扩展（Truckstop、DAT、RTS、Triumph、圣约翰保理等），不是钱包，不存在助记词、HD 种子或私钥生成路径。应用代码未使用 Math.random；Date.now 仅用于 JWT 过期判断、storage 监听器 id、草稿/SSE 时间戳与货源搜索事件协调 id。OAuth access/refresh/id token 从货源站点抓取并写入存储，扩展本身不生成密钥材料。库内 Math.random 仅见于 React DOM 内部属性名、Quill 表格行 DOM id、xior 假进度抖动，以及 reflect-metadata 在 crypto 缺失时的 GUID 回退（Chrome 扩展有 WebCrypto，且非密钥路径）。get-nonce 为 webpack CSP style nonce，不是加密 nonce。无弱 RNG 用于密钥/助记词/种子/私钥/加密 IV/nonce/盐/秘密，故判定 clean。"
+}
