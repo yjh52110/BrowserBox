@@ -1,0 +1,9 @@
+{
+  "id": "Backpack__0.10.125__0132",
+  "product": "Backpack",
+  "version": "0.10.202",
+  "verdict": "clean",
+  "worst_severity": "none",
+  "confirmed_findings": [],
+  "summary": "Backpack 0.10.202（清单版本；目录 id 为 0.10.125）新建助记词仅在后台 Vte.OF(128) 生成：bip39 取 16 字节熵，底层 @noble/hashes randomBytes 优先 crypto.getRandomValues，否则 Node randomBytes，缺失即抛错，无 Math.random 回退。软件密钥由助记词 PBKDF2-SHA512 种子再 HD 派生（EVM/Tron 走 ethers HDNodeWallet，Solana 走 ed25519-hd-key + nacl.sign.keyPair.fromSeed），导入私钥不新抽；通行密钥钱包用 WebAuthn PRF（challenge/userId 为 getRandomValues）再 HKDF 得到种子。金库/助记词备份 Nre 使用 tweetnacl secretbox：16 字节盐与 24 字节 nonce 均来自 setPRNG(getRandomValues)；ethers JSON 钱包 IV 为 ZY/bI(16)（缺失 CSPRNG 抛 UNSUPPORTED_OPERATION）。其余 Math.random 仅用于 UI/动画、axios/ethers 重试抖动、Sui 交易过期 nonce、Ledger HID 通道、功能开关与请求 ID。未发现助记词、密钥、IV/nonce 或盐使用弱熵。"
+}

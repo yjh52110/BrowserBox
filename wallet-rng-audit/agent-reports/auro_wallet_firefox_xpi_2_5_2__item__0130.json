@@ -1,0 +1,9 @@
+{
+  "id": "auro_wallet_firefox_xpi_2_5_2__item__0130",
+  "product": "Auro Wallet",
+  "version": "2.5.2",
+  "verdict": "clean",
+  "worst_severity": "none",
+  "confirmed_findings": [],
+  "summary": "Auro Wallet 2.5.2 的 12 词助记词由后台 @scure/bip39 的 lp(english,128) 生成，16 字节熵来自 crypto.getRandomValues，缺失 CSPRNG 时直接抛错；弹窗仅通过 WALLET_GET_CREATE_MNEMONIC RPC 取词，并用 getRandomValues 做备份校验洗牌。Mina 私钥由 BIP39 PBKDF2 种子经 BIP32 HDKey 派生（m/44'/coin'/account'/0/0），不走独立弱随机 keygen。金库盐 Lr() 与 AES-GCM 16 字节 IV 均用 getRandomValues，会话钥由 libsodium Argon2id 派生；mina-signer 的 Scalar/Field.random 与 createNullifier 也走 getRandomValues 拒绝采样。node-forge 的 AES-CBC+RSA 仅用于 token-build 通道，getBytesSync 在扩展环境优先 WebCrypto。其余 Math.random 仅用于 React/Redux/axios、路由 key、Ledger HID 通道和 dapp 消息 UUID 回退。未发现助记词、密钥、IV/nonce 或种子路径使用弱随机数。"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "alby__2.0.1__0001",
+  "product": "alby",
+  "version": "2.0.1",
+  "verdict": "clean",
+  "worst_severity": "none",
+  "confirmed_findings": [],
+  "summary": "Alby 2.0.1 的密钥与加密随机数均来自 WebCrypto getRandomValues，缺失时直接抛错，不回退到 Math.random。Nostr 随机私钥与 Commando/Noise 会话密钥由 noble-secp256k1 的 CSPRNG 生成；账户/LNC 加密盐使用 generateSalt（getRandomValues），NIP-04 AES IV 使用 CryptoJS WordArray.random（同样只接受原生 CSPRNG）。LNC WASM 的 runtime.getRandomData 绑定 crypto.getRandomValues。其余 Math.random 仅用于 React/彩带、路由 key、postMessage 与 nativeMessaging 请求关联 id 以及 Dexie 同步触发；Date.now 仅作时间戳。html5-qrcode 的 Alea 仅用于扫码配色。未发现将弱随机数用作密钥、助记词、IV/nonce 或种子的问题。"
+}

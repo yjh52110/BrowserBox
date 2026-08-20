@@ -1,0 +1,9 @@
+{
+  "id": "ASI_Alliance_Wallet__1.0.19__0073",
+  "product": "Taostats: The Bittensor Wallet",
+  "version": "1.0.19",
+  "verdict": "clean",
+  "worst_severity": "none",
+  "confirmed_findings": [],
+  "summary": "Taostats: The Bittensor Wallet 1.0.19 的助记词由 @taostats-wallet/crypto.generateMnemonic 调用 @scure/bip39，熵来自 @noble/hashes.randomBytes（crypto.getRandomValues，缺失即抛错），12/24 词分别对应 128/256 位。密钥环 AES-GCM 的 16 字节盐与 12 字节 IV、browser-passworder 金库盐/16 字节 IV、ML-KEM+XChaCha20-Poly1305 的 24 字节 nonce、以及 bcryptjs genSalt(13) 均走 getRandomValues，无 Math.random 回退。Polkadot JSON/nacl 加密与 sr25519 临时密钥的 salt/nonce 走 @polkadot/x-randomvalues（getRandomValues）；tweetnacl/uuid/noble-ciphers 在缺少 CSPRNG 时抛错。其余 Math.random 仅用于星空背景、助记词校验干扰词、Sentry 采样、PostHog 延迟、Ledger HID 通道、链连接 socket id 与图表 shuffle。未发现助记词、密钥、IV/nonce 或种子路径使用弱随机数。"
+}

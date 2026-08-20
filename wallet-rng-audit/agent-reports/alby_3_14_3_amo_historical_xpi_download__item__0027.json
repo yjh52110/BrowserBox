@@ -1,0 +1,9 @@
+{
+  "id": "alby_3_14_3_amo_historical_xpi_download__item__0027",
+  "product": "alby",
+  "version": "3.14.3",
+  "verdict": "clean",
+  "worst_severity": "none",
+  "confirmed_findings": [],
+  "summary": "Alby 3.14.3（AMO 历史 XPI）的助记词、私钥与 IV/nonce/salt 均来自 Web Crypto getRandomValues（或 Node randomBytes），缺失 CSPRNG 时抛错而不回退 Math.random。后台 generateMnemonic 为 @scure/bip39 的 c_(JM,128)，经 noble-hashes 从 globalThis.crypto 取 16 字节熵；UI 侧仅为 RPC。Nostr（m/44'/1237'/0'/0/0）、Liquid（m/84'/1776' 或 m/84'/1'，SLIP-77 由种子派生）与 WebBTC/Bitcoin（m/86' taproot）私钥均从加密主助记词 HD 派生。NIP-04 IV 为 CryptoJS 4.x WordArray.random(16)，NIP-44 默认 nonce 为 $b(32)，金库 AES/OpenSSL 盐为 WordArray.random(8)，LNC 盐与 WASM runtime.getRandomData 同样只接受原生 CSPRNG；uuid/brorand/browserify-randombytes 失败即抛。BitSet.Random 的 Math.random 无调用点；其余 Math.random 仅用于 React/路由/彩带、axios 令牌、页面请求 ID 与 Nostr created_at 隐私抖动。未发现用于助记词/密钥/IV/nonce/种子的弱熵源。"
+}

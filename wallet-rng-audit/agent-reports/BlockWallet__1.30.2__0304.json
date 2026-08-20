@@ -1,0 +1,9 @@
+{
+  "id": "BlockWallet__1.30.2__0304",
+  "product": "Immersive Translate: AI Web, PDF & Video Translator",
+  "version": "1.30.2",
+  "verdict": "clean",
+  "worst_severity": "none",
+  "confirmed_findings": [],
+  "summary": "目录项 BlockWallet 1.30.2 经 manifest 与 _locales/en 核对，实为 Immersive Translate: AI Web, PDF & Video Translator 1.30.2，是网页/PDF/视频字幕翻译扩展，不含钱包、助记词、HD 种子或私钥生成路径。本地配置加密走 AES-GCM + PBKDF2，盐与 IV 均由 crypto.getRandomValues 生成。Math.random/Date.now 仅用于消息关联 ID、分析/会话/试用 ID、自定义服务与词条 UI 标识、API Key 轮询、DeepL 请求号，以及有道 salt、阿里云 SignatureNonce 等公开请求参数（真实密钥为用户配置的 appSecret）。Lottie/ONNX/Tesseract 中的随机数为动画或推理库用途。未发现密钥、助记词、加密 IV/nonce/盐或机密由弱 RNG 生成。"
+}

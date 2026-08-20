@@ -1,0 +1,9 @@
+{
+  "id": "Backpack__4.2.8__0186",
+  "product": "Free VPN For Chrome - VPN Extension - Windscribe",
+  "version": "4.2.8",
+  "verdict": "clean",
+  "worst_severity": "none",
+  "confirmed_findings": [],
+  "summary": "该包清单与 _locales 实为 Windscribe 4.2.8（完整名 Free VPN For Chrome - VPN Extension - Windscribe），目录误标 Backpack。此为 Chrome VPN/代理扩展并内嵌 uBlock Origin Lite，无助记词、HD 种子或钱包私钥路径。代理账号密码由服务端 ServerCredentials API 下发（base64 存储后 atob 用于 HTTP 407），session_auth_hash 来自登录接口；client_auth_hash 为硬编码客户端密钥与时间戳的 MD5 请求签名，非本地抽熵。CryptoJS/WordArray.random 仅随库打包，AES.encrypt 未被调用，WordArray.random 走 getRandomValues。Math.random 仅用于 React/Redux/i18next ID、User-Agent 抽样、反指纹噪声及 uBO 脚本令牌/DOM 属性，未发现密钥、IV/nonce 或秘密使用弱熵。"
+}

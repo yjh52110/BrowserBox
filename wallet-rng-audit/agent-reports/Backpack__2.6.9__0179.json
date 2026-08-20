@@ -1,0 +1,9 @@
+{
+  "id": "Backpack__2.6.9__0179",
+  "product": "cat-catch",
+  "version": "2.6.9",
+  "verdict": "clean",
+  "worst_severity": "none",
+  "confirmed_findings": [],
+  "summary": "该包清单实为网页媒体嗅探工具 cat-catch 2.6.9（__MSG_catCatch__，默认英文名 cat-catch / 中文名猫抓），非 Backpack 钱包。无助记词、HD 种子或私钥生成路径。HLS/m3u8 AES 解密使用播放列表下发或用户粘贴的密钥，IV 来自清单或媒体序号，扩展不自行抽样。Math.random 仅用于 MQTT clientId 后缀、下载完成后关页抖动、StreamSaver 路径名及第三方库内部唯一编号，均非密钥/IV/盐。Aria2 RPC token 与 MQTT 密码由用户配置，不由扩展生成。"
+}

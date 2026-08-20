@@ -1,0 +1,9 @@
+{
+  "id": "bearby_wallet_firefox_xpi_2_0_14__item__0219",
+  "product": "Bearby",
+  "version": "2.0.14",
+  "verdict": "clean",
+  "worst_severity": "none",
+  "confirmed_findings": [],
+  "summary": "清单确认为 Bearby 2.0.14（bearby.io，量子抗性多链钱包），并非 ZilPay；injects/zilpay.js 仅为遗留文件名的 inpage 桥。助记词由后台 genBip39Words 按词数取熵（界面默认 24 词），经 Gt()：crypto.getRandomValues 填 32 字节再 ChaCha20 展开，entropyToMnemonic 生成，无 Math.random 回退。独立私钥 uo.generate 同样 Gt(32)；HD 账户由 BIP39 PBKDF2-SHA512（2048 轮，盐 mnemonic+口令）种子经 HMAC-SHA512（Bitcoin seed）按 m/44'/slip44'/0'/0/i 派生。金库口令经 Argon2id（盐为扩展 ID+平台信息，属确定性 KDF 盐而非弱 RNG）派生后，AES-CTR 计数器 Gt(16)、会话密钥 Gt(32)、Kuznechik gamma Gt(32)、NTRU Prime 封装 Gt(32)；Schnorr 签名随机 k 与 noble-curves extraEntropy 亦走同一 CSPRNG/getRandomValues。bundle/inject 中 Math.random 仅用于助记词确认页洗牌、Ledger HID 通道号、EVM/dapp 请求 UUID 及 EIP-6963 信息 UUID 回退；Date.now 只做会话过期与时间戳。未发现助记词、HD 种子、私钥或金库 IV/nonce/salt 由弱随机数生成。"
+}

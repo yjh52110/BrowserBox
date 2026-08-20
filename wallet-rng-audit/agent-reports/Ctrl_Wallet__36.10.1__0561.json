@@ -1,0 +1,9 @@
+{
+  "id": "Ctrl_Wallet__36.10.1__0561",
+  "product": "Ctrl Wallet",
+  "version": "36.11.3",
+  "verdict": "clean",
+  "worst_severity": "none",
+  "confirmed_findings": [],
+  "summary": "manifest 确认实际产品为 Ctrl Wallet 36.11.3（目录项 36.10.1 与 blob 不一致，author XDEFI）。新建助记词经 ~shared/keystore.generateMnemonic 调用 @scure/bip39，熵为 noble randomBytes → crypto.getRandomValues（缺失则抛错）；onboarding 与 createWalletMnemonic 同源，无助记词时同样走该路径。金库 encryptDataToKeystore 用 browserify crypto.randomBytes(32) 作 PBKDF2 盐、randomBytes(16) 作 AES-128-CTR IV，底层绑定 getRandomValues。HD 种子由助记词经 PBKDF2/SHA-512 确定性派生，不另造熵。ethers createRandom/keystore 加密、tweetnacl setPRNG、CryptoJS cryptoSecureRandomInt、Cardano generateRandomSeed 均用 getRandomValues。Math.random 仅用于钱包展示 id、JSON-RPC/重试抖动、Sentry/React/uuid 及库内 BigNumber/Miller-Rabin，不进入密钥/IV/盐。getRandomValues 用于秘密，判定 clean。"
+}

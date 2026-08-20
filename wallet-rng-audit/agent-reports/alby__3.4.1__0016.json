@@ -1,0 +1,9 @@
+{
+  "id": "alby__3.4.1__0016",
+  "product": "alby",
+  "version": "3.4.1",
+  "verdict": "clean",
+  "worst_severity": "none",
+  "confirmed_findings": [],
+  "summary": "Alby 3.4.1 的助记词、私钥与 AES-CBC/NIP-04 IV 均通过 crypto.getRandomValues 生成，缺失 CSPRNG 时直接抛错，不回退到 Math.random。助记词由后台 @scure/bip39（Yo(ha,128)）用 noble-hashes or(16) 取 16 字节熵；options/popup/welcome 的 generateMnemonic 只是后台 RPC。Nostr/Bitcoin/Liquid 私钥从加密主助记词 HD 派生（m/44'/1237'、m/86'、m/84'/1776'，SLIP77 由种子派生）；LNC/WASM Noise 本地钥走 runtime.getRandomData→getRandomValues。账户盐、uuid、brorand、CryptoJS WordArray.random 与签名 extraEntropy 同样只接受原生 CSPRNG。BitSet.Random 与 ECPair.makeRandom 无调用点；其余 Math.random 与 html5-qrcode Alea 仅用于 React/路由、请求关联 ID、彩带动画和扫码配色。未发现用于密钥、助记词、IV/nonce 或种子的弱随机数缺陷。"
+}
